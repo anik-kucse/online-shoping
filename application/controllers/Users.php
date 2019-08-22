@@ -7,7 +7,7 @@ class Users extends MY_Controller
 
     private $registerErrors = array();
     private $user_id;
-    private $num_rows = 5;
+    private $num_rows = 1;
 
     public function __construct()
     {
@@ -68,7 +68,7 @@ class Users extends MY_Controller
         $this->render('signup', $head, $data);
     }
 
-    public function myaccount($page = 0)
+    public function userbackup($page = 0)
     {
         if (!isset($_SESSION['logged_user'])) {
             redirect(LANG_URL . '/login');
@@ -91,6 +91,40 @@ class Users extends MY_Controller
         $data['orders_history'] = $this->Public_model->getUserOrdersHistory($_SESSION['logged_user'], $this->num_rows, $page);
         $data['links_pagination'] = pagination('myaccount', $rowscount, $this->num_rows, 2);
         $this->render('user', $head, $data);
+    }
+
+    public function myaccount($page = 0) {
+        if (!isset($_SESSION['logged_user'])) {
+            redirect(LANG_URL . '/login');
+        }
+
+        $head = array();
+        $data = array();
+        $head['title'] = lang('my_acc');
+        $head['description'] = lang('my_acc');
+        $head['keywords'] = str_replace(" ", ",", $head['title']);
+
+        $rowscount = $this->Public_model->getUserOrdersHistoryCount($_SESSION['logged_user']);
+        $orderNumber = intval($this->Public_model->getUserOrdersHistoryCount($_SESSION['logged_user']));
+        $data['orders_history'] = $this->Public_model->getUserOrdersHistory($_SESSION['logged_user'], $orderNumber, $page);
+//        $data['links_pagination'] = pagination('myaccount', $rowscount, $this->num_rows, 2);
+
+        $this->render('my_account', $head, $data);
+    }
+
+    public function dummy($orderNo = 0){
+        if (!isset($_SESSION['logged_user'])) {
+            redirect(LANG_URL . '/login');
+        }
+
+        $head = array();
+        $data = array();
+        $head['title'] = lang('my_acc');
+        $head['description'] = lang('my_acc');
+        $head['keywords'] = str_replace(" ", ",", $head['title']);
+
+        $this->render('order_detail', $head, $data);
+
     }
 
     public function logout()

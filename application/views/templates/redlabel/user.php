@@ -21,13 +21,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="table-responsive">
                 <table class="table table-condensed table-bordered table-striped">
                     <thead>
-                    <tr>
-                        <th><?= lang('usr_order_id') ?></th>
-                        <th><?= lang('usr_order_date') ?></th>
-                        <th><?= lang('usr_order_address') ?></th>
-                        <th><?= lang('usr_order_phone') ?></th>
-                        <th><?= lang('user_order_products') ?></th>
-                    </tr>
+                        <tr>
+                            <th><?= lang('usr_order_id') ?></th>
+                            <th><?= lang('usr_order_date') ?></th>
+                            <th><?= lang('usr_order_address') ?></th>
+                            <th><?= lang('usr_order_phone') ?></th>
+                            <th><?= lang('user_order_products') ?></th>
+                        </tr>
                     </thead>
                     <tbody>
                     <?php
@@ -47,12 +47,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         ?>
                                         <div style="word-break: break-all;">
                                             <div>
-                                                <img src="<?= base_url('attachments/shop_images/' . $productInfo['image']) ?>" alt="Product" style="width:100px; margin-right:10px;" class="img-responsive">
+                                                <img src="<?= base_url('/attachments/shop_images/' . $product_quantity['product_info']['image']) ?>" alt="Product" style="width:100px; margin-right:10px;" class="img-responsive">
                                             </div>
-                                            <a target="_blank" href="<?= base_url($productInfo['url']) ?>">
-                                                <?= base_url($productInfo['url']) ?>
+                                            <a target="_blank" href="<?= base_url($product_quantity['product_info']['url']) ?>">
+                                                <?= base_url($product_quantity['product_info']['url']) ?>
                                             </a>
-                                            <div style=" background-color: #f1f1f1; border-radius: 2px; padding: 2px 5px;"><b><?= lang('user_order_quantity') ?></b> <?= $product_quantity ?></div>
+                                            <div style=" background-color: #f1f1f1; border-radius: 2px; padding: 2px 5px;"><b><?= lang('user_order_quantity') ?></b> <?= $product_quantity['product_quantity'] ?></div>
                                             <div class="clearfix"></div>
                                         </div>
                                         <hr>

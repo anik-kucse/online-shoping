@@ -137,8 +137,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <span class="glyphicon glyphicon-circle-arrow-left"></span>
                         <?= lang('back_to_shop') ?>
                     </a>
-                    <a href="javascript:void(0);" class="btn btn-primary go-order" onclick="myFunction()" class="pull-left">
-                        <?= lang('custom_order') ?> 
+                    <a href="javascript:void(0);" class="btn btn-primary go-order" onclick="document.getElementById('goOrder').submit();" class="pull-left">
+                        <?= lang('custom_order') ?>
                         <span class="glyphicon glyphicon-circle-arrow-right"></span>
                     </a>
                     <div class="clearfix"></div>
