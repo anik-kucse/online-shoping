@@ -7,7 +7,7 @@ class Users extends MY_Controller
 
     private $registerErrors = array();
     private $user_id;
-    private $num_rows = 1;
+    private $num_rows = 5;
 
     public function __construct()
     {
@@ -104,7 +104,6 @@ class Users extends MY_Controller
         $head['description'] = lang('my_acc');
         $head['keywords'] = str_replace(" ", ",", $head['title']);
 
-        $rowscount = $this->Public_model->getUserOrdersHistoryCount($_SESSION['logged_user']);
         $orderNumber = intval($this->Public_model->getUserOrdersHistoryCount($_SESSION['logged_user']));
         $data['orders_history'] = $this->Public_model->getUserOrdersHistory($_SESSION['logged_user'], $orderNumber, $page);
 //        $data['links_pagination'] = pagination('myaccount', $rowscount, $this->num_rows, 2);
@@ -112,7 +111,7 @@ class Users extends MY_Controller
         $this->render('my_account', $head, $data);
     }
 
-    public function dummy($orderNo = 0){
+    public function orderDetail($orderNo){
         if (!isset($_SESSION['logged_user'])) {
             redirect(LANG_URL . '/login');
         }
@@ -123,8 +122,15 @@ class Users extends MY_Controller
         $head['description'] = lang('my_acc');
         $head['keywords'] = str_replace(" ", ",", $head['title']);
 
+        $results = $this->Public_model->getUserOrdersHistoryByOrderNumber($_SESSION['logged_user'], 1241);
+        $data['products'] = unserialize($results[0]['products']);
+        $productName = [];
+        foreach ($data['products'] as $item){
+            $res = $this->Public_model->getOneProduct($item['product_info']['id']);
+            array_push($productName, $res['title']);
+        }
+        $data['productName'] = $productName;
         $this->render('order_detail', $head, $data);
-
     }
 
     public function logout()

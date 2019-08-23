@@ -691,4 +691,13 @@ class Public_model extends CI_Model
         return $result->result_array();
     }
 
+    public function getUserOrdersHistoryByOrderNumber($userId, $orderNumber)
+    {
+        $this->db->where('user_id', $userId);
+        $this->db->where('order_id', $orderNumber);
+        $this->db->select('orders.products');
+        $result = $this->db->get('orders');
+        return $result->result_array();
+    }
+
 }

@@ -42,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <?php foreach ($orders_history as $id => $order){
                                     ?>
                                     <tr>
-                                        <td><a target="_parent" href="<?= base_url('amarissa') ?>"><?= $order['order_id'] ?></a></td>
+                                        <td><a target="_parent" href="<?= base_url('myaccount/orderdetail/'.$order['order_id']) ?>"><?= $order['order_id'] ?></a></td>
                                         <td><?= date('d.m.Y', $order['date'])?></td>
                                         <td><?= $order['address']?></td>
                                         <?php
