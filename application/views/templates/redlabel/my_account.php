@@ -19,8 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <ul class="nav nav-sidebar">
                         <li class="active"><a href="<?= base_url('myaccount') ?>">My Orders <span class="sr-only">(current)</span></a></li>
                         <li><a href="#">Address Book</a></li>
-                        <li><a href="#">Change Password</a></li>
-
+                        <li><a href="<?= base_url('myaccount/change') ?>">Change Email/Password</a></li>
                     </ul>
                 </div>
 

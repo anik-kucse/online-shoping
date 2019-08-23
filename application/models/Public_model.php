@@ -639,6 +639,20 @@ class Public_model extends CI_Model
         $this->db->update('users_public', $array);
     }
 
+    public function updateUserEmail($userId, $email)
+    {
+        $array = array('email' => $email);
+        $this->db->where('id', $userId);
+        $this->db->update('users_public', $array);
+    }
+
+    public function updateUserPassword($userId, $pass)
+    {
+        $array = array('password' => md5($pass));
+        $this->db->where('id', $userId);
+        $this->db->update('users_public', $array);
+    }
+
     public function checkPublicUserIsValid($post)
     {
         $this->db->where('email', $post['email']);
@@ -651,6 +665,20 @@ class Public_model extends CI_Model
             return $result['id'];
         }
     }
+
+    public function checkPublicUserIsValidByIdPass($id, $pass)
+    {
+        $this->db->where('id', $id);
+        $this->db->where('password', md5($pass));
+        $query = $this->db->get('users_public');
+        $result = $query->row_array();
+        if (empty($result)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 
     public function getUserProfileInfo($id)
     {

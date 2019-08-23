@@ -133,6 +133,58 @@ class Users extends MY_Controller
         $this->render('order_detail', $head, $data);
     }
 
+    public function changeEmailPass(){
+        if (!isset($_SESSION['logged_user'])) {
+            redirect(LANG_URL . '/login');
+        }
+
+        if (isset($_POST['change_email'])) {
+            $validationError = array();
+            $result = $this->Public_model->checkPublicUserIsValidByIdPass($_SESSION['logged_user'], $_POST['pass']);
+            if ($result == false) {
+                $validationError[] =  "You have entered wrong password";
+                $this->session->set_flashdata('submit_error', $validationError);
+            } else {
+                $this->Public_model->updateUserEmail($_SESSION['logged_user'], $_POST['new_email']);
+                $this->session->set_flashdata('submit_success', 'Your email has been updated');
+            }
+        }
+
+        if (isset($_POST['change_pass'])) {
+            $validationError = array();
+            $result = $this->Public_model->checkPublicUserIsValidByIdPass($_SESSION['logged_user'], $_POST['old_pass']);
+            if ($result == false) {
+                $validationError[] =  "You have entered wrong password";
+                $this->session->set_flashdata('submit_error', $validationError);
+            } else {
+                if($_POST['new_pass'] === $_POST['con_pass']) {
+                    $this->Public_model->updateUserPassword($_SESSION['logged_user'], $_POST['new_pass']);
+                    $this->session->set_flashdata('submit_success', 'Your password has been updated');
+                } else {
+                    $validationError[] =  "Tow password doesn't match";
+                    $this->session->set_flashdata('submit_error', $validationError);
+                }
+            }
+        }
+
+        $head = array();
+        $data = array();
+        $head['title'] = lang('my_acc');
+        $head['description'] = lang('my_acc');
+        $head['keywords'] = str_replace(" ", ",", $head['title']);
+
+        $results = $this->Public_model->getUserOrdersHistoryByOrderNumber($_SESSION['logged_user'], 1241);
+        $data['products'] = unserialize($results[0]['products']);
+        $productName = [];
+        foreach ($data['products'] as $item){
+            $res = $this->Public_model->getOneProduct($item['product_info']['id']);
+            array_push($productName, $res['title']);
+        }
+        $data['productName'] = $productName;
+        $this->render('changepass', $head, $data);
+
+    }
+
     public function logout()
     {
         unset($_SESSION['logged_user']);

@@ -116,8 +116,8 @@ $route['(\w{2})/myaccount'] = "Users/myaccount";
 $route['(\w{2})/myaccount/(:num)'] = "Users/myaccount/$2";
 $route['myaccount/userbackup'] = "Users/userbackup";
 $route['myaccount/userbackup/(:num)'] = "Users/userbackup/$1";
-//$route['myaccount/orderdetail'] = "Users/orderDetail";
 $route['myaccount/orderdetail/(:num)'] = "Users/orderDetail/$1";
+$route['myaccount/change'] = "Users/changeEmailPass";
 
 // Logout Profiles Public Users Page
 $route['logout'] = "Users/logout";
