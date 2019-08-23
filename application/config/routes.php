@@ -118,6 +118,8 @@ $route['myaccount/userbackup'] = "Users/userbackup";
 $route['myaccount/userbackup/(:num)'] = "Users/userbackup/$1";
 $route['myaccount/orderdetail/(:num)'] = "Users/orderDetail/$1";
 $route['myaccount/change'] = "Users/changeEmailPass";
+$route['myaccount/address'] = "Users/address";
+$route['myaccount/newaddress'] = "Users/newAddress";
 
 // Logout Profiles Public Users Page
 $route['logout'] = "Users/logout";

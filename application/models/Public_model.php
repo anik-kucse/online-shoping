@@ -639,6 +639,40 @@ class Public_model extends CI_Model
         $this->db->update('users_public', $array);
     }
 
+    public function updateProfileWithoutPassword($id, $name, $phone)
+    {
+        $array = array(
+            'name' => $name,
+            'phone' => $phone,
+        );
+        $this->db->where('id', $id);
+        $this->db->update('users_public', $array);
+    }
+
+
+    public function updateUserAddress($id, $city, $postCode, $address)
+    {
+        $array = array(
+            'address' => $address,
+            'city' => $city,
+            'post_code' => $postCode
+        );
+        $this->db->where('id', $id);
+        $this->db->update('user_address', $array);
+    }
+
+    public function getUserAddressCount($userId)
+    {
+        $this->db->where('id', $userId);
+        return $this->db->count_all_results('user_address');
+    }
+
+    public function insertUserAddress($id, $city, $postCode, $address)
+    {
+        $result = $this->db->insert('user_address', array('id' => $id, 'address' => $address, 'city' => $city, 'post_code' => $postCode));
+        return $result;
+    }
+
     public function updateUserEmail($userId, $email)
     {
         $array = array('email' => $email);
@@ -683,6 +717,15 @@ class Public_model extends CI_Model
     public function getUserProfileInfo($id)
     {
         $this->db->where('id', $id);
+        $query = $this->db->get('users_public');
+        return $query->row_array();
+    }
+
+    public function getUserProfileInfoAddress($id)
+    {
+        $this->db->where('users_public.id', $id);
+        $this->db->select('users_public.name, users_public.email, users_public.phone, user_address.address, user_address.city, user_address.post_code');
+        $this->db->join('user_address', 'users_public.id = user_address.id', 'left');
         $query = $this->db->get('users_public');
         return $query->row_array();
     }

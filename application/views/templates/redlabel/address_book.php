@@ -12,7 +12,7 @@
         margin: 15px 10px 5px;
     }
 
-    h3{
+    h3, label{
         color: grey;
     }
 
@@ -23,9 +23,9 @@
             <div class="row">
                 <div class="col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
-                        <li class="active"><a href="#">My Orders <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">Address Book</a></li>
-                        <li><a href="#">Change Password</a></li>
+                        <li class="active"><a href="<?= base_url('myaccount') ?>">My Orders <span class="sr-only">(current)</span></a></li>
+                        <li><a href="<?= base_url('myaccount/address') ?>">My Address</a></li>
+                        <li><a href="<?= base_url('myaccount/change') ?>">Change Email/Password</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-10 main">
@@ -34,102 +34,18 @@
                         <div id="my_address">
                             <h3>My Address</h3>
                             <div class="col-md-12" id="detailsAddress" style="padding-top: 10px">
-                                <div class="col-md-12 from-control row">
-                                    <label class="col-md-2 col-form-label">First Name</label>
-                                    <div class="col-md-10">
-                                        <label class="form-control" type="text" id="firstName" name="firstName" ></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 from-control row">
-                                    <label class="col-md-2 col-form-label">Last Name</label>
-                                    <div class="col-md-10">
-                                        <label class="form-control" type="text" id="lastName" name="lastName" ></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 from-control row">
-                                    <label class="col-md-2 col-form-label">Email</label>
-                                    <div class="col-md-10">
-                                        <label class="form-control" type="text" id="email" name="email" ></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 from-control row">
-                                    <label class="col-md-2 col-form-label">Phone Number</label>
-                                    <div class="col-md-10">
-                                        <label class="form-control" type="text" id="phone" name="phone" ></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 from-control row">
-                                    <label class="col-md-2 col-form-label">Address</label>
-                                    <div class="col-md-10">
-                                        <textarea class="form-control" id="address" name="address" readonly></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 from-control row">
-                                    <label class="col-md-2 col-form-label">City</label>
-                                    <div class="col-md-10">
-                                        <label class="form-control" type="text" id="city" name="city" ></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 from-control row">
-                                    <label class="col-md-2 col-form-label">Post Code</label>
-                                    <div class="col-md-10">
-                                        <label class="form-control" type="text" id="postCode" name="postCode" ></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 from-control row">
-                                    <label class="col-md-2 col-form-label"><a href="#">Edit Address</a></label>
-                                </div>
+                                <label class="col-md-12 col-form-label row"><?= $userInfo['name'] ?></label>
+                                <label class="col-md-12 col-form-label row"><?= $userInfo['email'] ?></label>
+                                <label class="col-md-12 col-form-label row"><?= $userInfo['phone'] ?></label>
+                                <?php if($userInfo['address'] == NULL) { ?>
+                                    <label class="col-md-12 col-form-label row">You don't have any address yet.<a href="<?= base_url('myaccount/newaddress') ?>">Add here</a></label>
+                                <?php } else { ?>
+                                    <label class="col-md-12 col-form-label row"><?= $userInfo['address'] ?></label>
+                                    <label class="col-md-12 col-form-label row"><?= $userInfo['city']. ', '. $userInfo['post_code'] ?></label>
+                                    <label class="col-md-12 col-form-label row"><a href="<?= base_url('myaccount/newaddress') ?>">Edit Address</a></label>
+                                <?php } ?>
                             </div>
                             <br>
-                        </div>
-                        <br>
-                        <br>
-                        <div id="order_address">
-                            <h3 >Orders Address</h3>
-                            <div class="col-md-12" id="detailsOrdersAddress" >
-                                <div class="col-md-12 from-control row">
-                                    <label class="col-md-2 col-form-label">First Name</label>
-                                    <div class="col-md-10">
-                                        <label class="form-control" type="text" id="firstName" name="firstName" ></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 from-control row">
-                                    <label class="col-md-2 col-form-label">Last Name</label>
-                                    <div class="col-md-10">
-                                        <label class="form-control" type="text" id="lastName" name="lastName" ></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 from-control row">
-                                    <label class="col-md-2 col-form-label">Email</label>
-                                    <div class="col-md-10">
-                                        <label class="form-control" type="text" id="email" name="email" ></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 from-control row">
-                                    <label class="col-md-2 col-form-label">Phone Number</label>
-                                    <div class="col-md-10">
-                                        <label class="form-control" type="text" id="phone" name="phone" ></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 from-control row">
-                                    <label class="col-md-2 col-form-label">Address</label>
-                                    <div class="col-md-10">
-                                        <textarea class="form-control" id="address" name="address" readonly></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 from-control row">
-                                    <label class="col-md-2 col-form-label">City</label>
-                                    <div class="col-md-10">
-                                        <label class="form-control" type="text" id="city" name="city" ></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 from-control row">
-                                    <label class="col-md-2 col-form-label">Post Code</label>
-                                    <div class="col-md-10">
-                                        <label class="form-control" type="text" id="postCode" name="postCode" ></label>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

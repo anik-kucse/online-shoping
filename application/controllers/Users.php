@@ -185,6 +185,53 @@ class Users extends MY_Controller
 
     }
 
+    public function address() {
+        if (!isset($_SESSION['logged_user'])) {
+            redirect(LANG_URL . '/login');
+        }
+
+        $head = array();
+        $data = array();
+        $head['title'] = lang('my_acc');
+        $head['description'] = lang('my_acc');
+        $head['keywords'] = str_replace(" ", ",", $head['title']);
+
+        $data['userInfo'] = $this->Public_model->getUserProfileInfoAddress($_SESSION['logged_user']);
+
+        $this->render('address_book', $head, $data);
+    }
+
+    public function newAddress() {
+        if (!isset($_SESSION['logged_user'])) {
+            redirect(LANG_URL . '/login');
+        }
+
+        if (isset($_POST['save_address'])) {
+
+            $this->Public_model->updateProfileWithoutPassword($_SESSION['logged_user'], $_POST['name'], $_POST['phone']);
+
+            $isAddress = $this->Public_model->getUserAddressCount($_SESSION['logged_user']);
+
+            if($isAddress != 0) {
+                $this->Public_model->updateUserAddress($_SESSION['logged_user'], $_POST['city'], $_POST['post_code'], $_POST['address']);
+                $this->session->set_flashdata('submit_success', "Information Updated");
+            } else {
+                $this->Public_model->insertUserAddress($_SESSION['logged_user'], $_POST['city'], $_POST['post_code'], $_POST['address']);
+                $this->session->set_flashdata('submit_success', "Information Added");
+            }
+        }
+
+        $head = array();
+        $data = array();
+        $head['title'] = lang('my_acc');
+        $head['description'] = lang('my_acc');
+        $head['keywords'] = str_replace(" ", ",", $head['title']);
+
+        $data['userInfo'] = $this->Public_model->getUserProfileInfoAddress($_SESSION['logged_user']);
+
+        $this->render('new_address', $head, $data);
+    }
+
     public function logout()
     {
         unset($_SESSION['logged_user']);
