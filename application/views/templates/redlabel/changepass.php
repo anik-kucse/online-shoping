@@ -65,7 +65,7 @@
                             </form>
                         </div>
                         <div class="col-sm-6">
-                            <h1>Cart Details</h1>
+                            <h1>Change Password</h1>
                             <hr>
                             <form method="POST" action="">
                                 <div class="row">

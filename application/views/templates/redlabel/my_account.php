@@ -48,7 +48,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         $product = unserialize($order['products']);
                                         $total = 0;
                                         foreach ($product as $item) {
-                                            $total = $total + intval($item['product_info']['price']);
+                                            $total = $total + $item['product_info']['price'] * $item['product_quantity'];
                                         } ?>
                                         <td><?= $total?></td>
                                         <td><?php if($order['viewed'] == "1") {

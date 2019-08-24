@@ -23,6 +23,9 @@ class Checkout extends MY_Controller
         $head['keywords'] = str_replace(" ", ",", $head['title']);
 
         if (isset($_POST['payment_type'])) {
+            if (!isset($_SESSION['logged_user'])) {
+                redirect(LANG_URL . '/login');
+            }
             $errors = $this->userInfoValidate($_POST);
             if (!empty($errors)) {
                 $this->session->set_flashdata('submit_error', $errors);
@@ -51,6 +54,9 @@ class Checkout extends MY_Controller
         $data['cashondelivery_visibility'] = $this->Home_admin_model->getValueStore('cashondelivery_visibility');
         $data['paypal_email'] = $this->Home_admin_model->getValueStore('paypal_email');
         $data['bestSellers'] = $this->Public_model->getbestSellers();
+        if(isset($_SESSION['logged_user'])) {
+            $data['userInfo'] = $this->Public_model->getUserProfileInfoAddress($_SESSION['logged_user']);
+        }
         $this->render('checkout', $head, $data);
     }
 
@@ -114,9 +120,9 @@ class Checkout extends MY_Controller
         if (mb_strlen(trim($post['first_name'])) == 0) {
             $errors[] = lang('first_name_empty');
         }
-        if (mb_strlen(trim($post['last_name'])) == 0) {
-            $errors[] = lang('last_name_empty');
-        }
+//        if (mb_strlen(trim($post['last_name'])) == 0) {
+//            $errors[] = lang('last_name_empty');
+//        }
         if (!filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
             $errors[] = lang('invalid_email');
         }

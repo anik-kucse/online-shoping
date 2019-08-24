@@ -10,7 +10,7 @@
                     </ul>
                 </div>
                 <div class="col-sm-10 main">
-                    <h1 class="page-header">Cart Details</h1>
+                    <h1 class="page-header">Order Details</h1>
                     <div class="table-responsive">
                         <?php if(!empty($products)) {
                             $total = 0; ?>

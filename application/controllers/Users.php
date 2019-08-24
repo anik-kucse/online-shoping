@@ -122,7 +122,7 @@ class Users extends MY_Controller
         $head['description'] = lang('my_acc');
         $head['keywords'] = str_replace(" ", ",", $head['title']);
 
-        $results = $this->Public_model->getUserOrdersHistoryByOrderNumber($_SESSION['logged_user'], 1241);
+        $results = $this->Public_model->getUserOrdersHistoryByOrderNumber($_SESSION['logged_user'], $orderNo);
         $data['products'] = unserialize($results[0]['products']);
         $productName = [];
         foreach ($data['products'] as $item){

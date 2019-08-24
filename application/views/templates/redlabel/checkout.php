@@ -41,33 +41,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <span class="top-header text-center"><?= lang('choose_payment') ?></span>
                     </div>
                     <div class="row">
-                        <div class="form-group col-sm-6">
+                        <div class="form-group col-sm-12">
                             <label for="firstNameInput">First Name(<sup><?= lang('requires') ?></sup>)</label>
-                            <input id="firstNameInput" class="form-control has-error" name="first_name" value="<?= @$_POST['first_name'] ?>" type="text" placeholder="First name">
-                        </div>
-                        <div class="form-group col-sm-6">
-                            <label for="lastNameInput">Last Name(<sup><?= lang('requires') ?></sup>)</label>
-                            <input id="lastNameInput" class="form-control" name="last_name" value="<?= @$_POST['last_name'] ?>" type="text" placeholder="Last name">
+                            <input id="firstNameInput" class="form-control has-error" name="first_name" value="<?= isset($userInfo) ? $userInfo['name'] : '' ?>" type="text" placeholder="First name">
                         </div>
                         <div class="form-group col-sm-6">
                             <label for="emailAddressInput"><?= lang('email_address') ?> (<sup><?= lang('requires') ?></sup>)</label>
-                            <input id="emailAddressInput" class="form-control" name="email" value="<?= @$_POST['email'] ?>" type="text" placeholder="<?= lang('email_address') ?>">
+                            <input id="emailAddressInput" class="form-control" name="email" value="<?= isset($userInfo) ? $userInfo['email'] : '' ?>" type="text" placeholder="<?= lang('email_address') ?>">
                         </div>
                         <div class="form-group col-sm-6">
                             <label for="phoneInput"><?= lang('phone') ?> (<sup><?= lang('requires') ?></sup>)</label>
-                            <input id="phoneInput" class="form-control" name="phone" value="<?= @$_POST['phone'] ?>" type="text" placeholder="<?= lang('phone') ?>">
+                            <input id="phoneInput" class="form-control" name="phone" value="<?= isset($userInfo) ? $userInfo['phone'] : '' ?>" type="text" placeholder="<?= lang('phone') ?>">
                         </div>
                         <div class="form-group col-sm-12">
                             <label for="addressInput"><?= lang('address') ?> (<sup><?= lang('requires') ?></sup>)</label>
-                            <textarea id="addressInput" name="address" class="form-control" rows="3"><?= @$_POST['address'] ?></textarea>
+                            <textarea id="addressInput" name="address" class="form-control" rows="3"><?= isset($userInfo) && $userInfo['address'] != null ? $userInfo['address'] : ''?></textarea>
                         </div>
                         <div class="form-group col-sm-6">
                             <label for="cityInput"><?= lang('city') ?> (<sup><?= lang('requires') ?></sup>)</label>
-                            <input id="cityInput" class="form-control" name="city" value="<?= @$_POST['city'] ?>" type="text" placeholder="<?= lang('city') ?>">
+                            <input id="cityInput" class="form-control" name="city" value="<?= isset($userInfo) && $userInfo['city'] != null ? $userInfo['city'] : '' ?>" type="text" placeholder="<?= lang('city') ?>">
                         </div>
                         <div class="form-group col-sm-6">
                             <label for="postInput"><?= lang('post_code') ?></label>
-                            <input id="postInput" class="form-control" name="post_code" value="<?= @$_POST['post_code'] ?>" type="text" placeholder="<?= lang('post_code') ?>">
+                            <input id="postInput" class="form-control" name="post_code" value="<?= isset($userInfo) && $userInfo['post_code'] != null ? $userInfo['post_code'] : ''?>" type="text" placeholder="<?= lang('post_code') ?>">
                         </div>
                         <div class="form-group col-sm-12">
                             <label for="notesInput"><?= lang('notes') ?></label>
@@ -76,9 +72,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                     <?php if ($codeDiscounts == 1) { ?>
                         <div class="discount">
-                            <label>Token</label>
-                            <input class="form-control" name="discountCode" value="<?= @$_POST['discountCode'] ?>" placeholder="Enter Token To Auto Fill" type="text">
-                            <a href="javascript:void(0);" class="btn btn-default" onclick="fillData()">Fill</a>
+                            <label><?= lang('discount_code') ?></label>
+                            <input class="form-control" name="discountCode" value="<?= @$_POST['discountCode'] ?>" placeholder="<?= lang('enter_discount_code') ?>" type="text">
+                            <a href="javascript:void(0);" class="btn btn-default" onclick="checkDiscountCode()"><?= lang('check_code') ?></a>
                         </div>
                     <?php } ?>
                     <div class="table-responsive">
@@ -155,144 +151,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </div>
     </div>
-	<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
-	<script>
-				var doc = new jsPDF();
-		var specialElementHandlers = {
-			'#editor': function (element, renderer) {
-				return true;
-			}
-		};
-		var length = 4;
-			var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
-			var b = [];  
-			for (var i=0; i<length; i++) {
-				var j = (Math.random() * (a.length-1)).toFixed(0);
-				b[i] = a[j];
-			}	
-			var txt;
-			
-			document.getElementById("phoneInput").value = "+880";
-			
-			function fillData(){		
-			document.getElementById("firstNameInput").value = Cookies.set('firstNameInput');
-			document.getElementById("lastNameInput").value = Cookies.set('lastNameInput');
-			document.getElementById("emailAddressInput").value = Cookies.set('emailAddressInput');
-			document.getElementById("phoneInput").value = Cookies.set('phoneInput');
-			document.getElementById("addressInput").value = Cookies.set('addressInput');
-			document.getElementById("cityInput").value = Cookies.set('cityInput');
-			document.getElementById("postInput").value = Cookies.set('postInput');
-			document.getElementById("notesInput").value = Cookies.set('notesInput');		
-	}
-	function fillSummeryData(){
-		    document.getElementById("title").value = Cookies.set('title');
-			document.getElementById("quantity").value = Cookies.set('quantity');
-			document.getElementById("price").value = Cookies.set('price');
-			document.getElementById("total").value = Cookies.set('total');
-			
-			// set data
-			Cookies.set('title', title);
-			Cookies.set('quantity', quantity);
-			Cookies.set('price', price);
-			Cookies.set('total', total);
-	}
-			
-	function myFunction() {
-		
-					
-			if(validateMe()){
-				alert('hi');
-				
-			doc.fromHTML($('table ').html(), 15, 15, {
-        'width': 170,
-            'elementHandlers': specialElementHandlers
-    });
-    doc.save('sample-file.pdf');
-			//document.getElementById('goOrder').submit();
-			
-			}
-			
-			function savePageAs(fileName){
-			  if(!fileName){fileName = location.href.toString(); }
-			  var X=new XMLHttpRequest, data="";
-			  X.open('GET', fileName, false );
-			  X.send('');	
-			  data = X.responseText;
-			 return window.open( "data:x-application/external;charset=utf-8," + escape(data));
-			}//
-			
-			}
-			
-			function validateMe(){
-			var firstNameInput = document.getElementById("firstNameInput").value;
-			
-			if(firstNameInput == ""){
-				alert('Fill First Name')
-				return false;
-			}
-			
-			var lastNameInput = document.getElementById("lastNameInput").value;
-			
-			if(lastNameInput == ""){
-				alert('Fill Last Name')
-				return false;
-			}
-			var emailAddressInput = document.getElementById("emailAddressInput").value;
-			
-			var phoneInput = document.getElementById("phoneInput").value;
-			
-			if(phoneInput.length != 14){			
-				if(isNaN(phoneInput)){
-				alert('phone number invalid');
-				return false;
-				}
-				alert('phone number invalid');
-				return false;
-			}
-			
-			var addressInput = document.getElementById("addressInput").value;
-			
-			if(addressInput == "" ){
-				alert('Fill Address')
-				return false;
-			}
-			
-			var cityInput = document.getElementById("cityInput").value;
-			if(cityInput == ""){
-				alert('Fill City Input')
-				return false;
-			}
-			var postInput = document.getElementById("postInput").value;
-			
-			if(postInput.length != 4){			
-				if(isNaN(postInput)){
-				alert('Postal Code invalid');
-				return false;
-				}
-				alert('Postal Code invalid');
-				return false;
-			}
-			
-			var notesInput = document.getElementById("notesInput").value;
-			
-			Cookies.set('firstNameInput', firstNameInput);
-			Cookies.set('lastNameInput', lastNameInput);
-			Cookies.set('emailAddressInput', emailAddressInput);
-			Cookies.set('phoneInput', phoneInput);
-			Cookies.set('addressInput', addressInput);
-			Cookies.set('cityInput', cityInput);
-			Cookies.set('postInput', postInput);
-			Cookies.set('notesInput', notesInput);
-			
-			var person = prompt("copy Your Token", b.join(""));
-					if (person == null || person == "") {
-					txt = "User cancelled the prompt.";
-					}
-			
-				return true;				
-			}
-	
-	</script>
 <?php } else { ?>
     <div class="alert alert-info"><?= lang('no_products_in_cart') ?></div>
     <?php
