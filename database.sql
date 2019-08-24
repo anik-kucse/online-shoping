@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2019 at 10:35 AM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.3
+-- Generation Time: Aug 24, 2019 at 06:04 AM
+-- Server version: 10.3.16-MariaDB
+-- PHP Version: 7.3.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -130,7 +130,12 @@ INSERT INTO `confirm_links` (`id`, `link`, `for_order`) VALUES
 (2, '9041e86b8a5b4b1536ebc4f00e440383', 1235),
 (3, '96b927b530a7287d54683ca886794d09', 1236),
 (4, '5a12111a0c35d879fcece53e4368877b', 1237),
-(5, 'f53d44e6a75ba1cb0fe31dbf9e2b0ce0', 1238);
+(5, 'f53d44e6a75ba1cb0fe31dbf9e2b0ce0', 1238),
+(6, '0b09a94723515265edd5f80bfef7a2aa', 1239),
+(7, '24746055f10b047a63d429989094a3f9', 1240),
+(8, '2fe668ede0906b4a0466af86eede7240', 1241),
+(9, '5009f026b85e770c5849e00e7181c2e4', 1243),
+(10, '2729d7120eaa1bfda419d17952e30e7d', 1244);
 
 -- --------------------------------------------------------
 
@@ -142,7 +147,7 @@ CREATE TABLE `cookie_law` (
   `id` int(10) UNSIGNED NOT NULL,
   `link` varchar(255) NOT NULL,
   `theme` varchar(20) NOT NULL,
-  `visibility` tinyint(1) NOT NULL DEFAULT '0'
+  `visibility` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -187,7 +192,7 @@ CREATE TABLE `discount_codes` (
   `amount` varchar(20) NOT NULL,
   `valid_from_date` int(10) UNSIGNED NOT NULL,
   `valid_to_date` int(10) UNSIGNED NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1-enabled, 0-disabled'
+  `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1-enabled, 0-disabled'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -220,7 +225,7 @@ CREATE TABLE `keys` (
   `id` int(11) NOT NULL,
   `key` varchar(40) NOT NULL,
   `level` int(2) NOT NULL,
-  `ignore_limits` tinyint(1) NOT NULL DEFAULT '0',
+  `ignore_limits` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -262,9 +267,9 @@ CREATE TABLE `orders` (
   `clean_referrer` varchar(255) NOT NULL,
   `payment_type` varchar(255) NOT NULL,
   `paypal_status` varchar(10) DEFAULT NULL,
-  `processed` tinyint(1) NOT NULL DEFAULT '0',
-  `viewed` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'viewed status is change when change processed status',
-  `confirmed` tinyint(1) NOT NULL DEFAULT '0',
+  `processed` tinyint(1) NOT NULL DEFAULT 0,
+  `viewed` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'viewed status is change when change processed status',
+  `confirmed` tinyint(1) NOT NULL DEFAULT 0,
   `discount_code` varchar(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -277,7 +282,13 @@ INSERT INTO `orders` (`id`, `order_id`, `user_id`, `products`, `date`, `referrer
 (2, 1235, 0, 'a:1:{i:0;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:2:\"28\";s:6:\"folder\";s:10:\"1557426429\";s:5:\"image\";s:11:\"images1.jpg\";s:4:\"time\";s:10:\"1557426627\";s:11:\"time_update\";s:10:\"1557481385\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"43\";s:8:\"quantity\";s:2:\"10\";s:11:\"procurement\";s:1:\"0\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:52:\"Lenovo_Laptop_IPIAP_XRBDIN_Intel_Pentium_QuadCore_28\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:5:\"30990\";}s:16:\"product_quantity\";s:1:\"4\";}}', 1557503370, 'Direct', 'Direct', 'cashOnDelivery', NULL, 1, 1, 0, ''),
 (3, 1236, 0, 'a:5:{i:0;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:1:\"7\";s:6:\"folder\";s:10:\"1556907233\";s:5:\"image\";s:15:\"41wE4XNt6dL.jpg\";s:4:\"time\";s:10:\"1556907359\";s:11:\"time_update\";s:10:\"1558434482\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"24\";s:8:\"quantity\";s:1:\"2\";s:11:\"procurement\";s:1:\"0\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:72:\"Samsung_Galaxy_S_SMGV_GB_Sapphire_Black_Smartphone_for_Verizon_Renewed_7\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:5:\"15200\";}s:16:\"product_quantity\";s:1:\"4\";}i:1;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:2:\"12\";s:6:\"folder\";s:10:\"1556909959\";s:5:\"image\";s:25:\"lg-22mk600m-1-500x500.jpg\";s:4:\"time\";s:10:\"1556910291\";s:11:\"time_update\";s:10:\"1558434448\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"13\";s:8:\"quantity\";s:2:\"15\";s:11:\"procurement\";s:1:\"0\";s:9:\"in_slider\";s:1:\"1\";s:3:\"url\";s:38:\"LG_MKM_inch_IPS_Full_HD_LED_Monitor_12\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"5\";s:5:\"price\";s:5:\"20000\";}s:16:\"product_quantity\";s:1:\"1\";}i:2;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:2:\"36\";s:6:\"folder\";s:10:\"1557428259\";s:5:\"image\";s:14:\"6295913_sd.jpg\";s:4:\"time\";s:10:\"1557428474\";s:11:\"time_update\";s:10:\"1557481613\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"40\";s:8:\"quantity\";s:1:\"1\";s:11:\"procurement\";s:1:\"0\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:97:\"Dell_Inspiron_in_TouchScreen_Laptop_Intel_Core_i_GB_Memory_GB_Solid_State_Drive_Silver_ISLVPUS_36\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:5:\"45000\";}s:16:\"product_quantity\";s:1:\"1\";}i:3;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:2:\"38\";s:6:\"folder\";s:10:\"1557428633\";s:5:\"image\";s:16:\"download_(1).jpg\";s:4:\"time\";s:10:\"1557428714\";s:11:\"time_update\";s:10:\"1557481707\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"40\";s:8:\"quantity\";s:1:\"9\";s:11:\"procurement\";s:1:\"6\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:31:\"Dell_Inspiron_inch_Laptop_PC_38\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:5:\"45000\";}s:16:\"product_quantity\";s:1:\"1\";}i:4;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:2:\"46\";s:6:\"folder\";s:10:\"1557431360\";s:5:\"image\";s:23:\"91-rFskHZWL__UY500_.jpg\";s:4:\"time\";s:10:\"1557431419\";s:11:\"time_update\";s:10:\"1557482003\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"44\";s:8:\"quantity\";s:1:\"1\";s:11:\"procurement\";s:1:\"1\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:76:\"Invicta_Mens_Specialty_Chronograph_k_Gold_IonPlated_Stainless_Steel_Watch_46\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:4:\"3700\";}s:16:\"product_quantity\";s:1:\"1\";}}', 1561100265, 'Direct', 'Direct', 'cashOnDelivery', NULL, 0, 0, 0, ''),
 (4, 1237, 0, 'a:1:{i:0;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:2:\"18\";s:6:\"folder\";s:10:\"1556945453\";s:5:\"image\";s:24:\"81gS9Sx0g7L__SX569_1.jpg\";s:4:\"time\";s:10:\"1556945551\";s:11:\"time_update\";s:10:\"1558434571\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"13\";s:8:\"quantity\";s:1:\"2\";s:11:\"procurement\";s:1:\"0\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:49:\"Apple_iPhone_GSM_Unlocked_GB_White_Refurbished_18\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:5:\"90990\";}s:16:\"product_quantity\";s:1:\"1\";}}', 1561800160, 'http://localhost/ministore/home/20', 'localhost', 'cashOnDelivery', NULL, 0, 0, 0, ''),
-(5, 1238, 0, 'a:1:{i:0;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:2:\"41\";s:6:\"folder\";s:10:\"1557429146\";s:5:\"image\";s:23:\"71QHGTKiwAL__UX342_.jpg\";s:4:\"time\";s:10:\"1557429233\";s:11:\"time_update\";s:10:\"1557481826\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"44\";s:8:\"quantity\";s:1:\"2\";s:11:\"procurement\";s:1:\"0\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:41:\"Espoir_Analog_Blue_Dial_Mens_Watch_ESP_41\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:4:\"2500\";}s:16:\"product_quantity\";s:1:\"1\";}}', 1561805700, 'http://localhost/ministore/home/20', 'localhost', 'cashOnDelivery', NULL, 0, 0, 0, '');
+(5, 1238, 0, 'a:1:{i:0;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:2:\"41\";s:6:\"folder\";s:10:\"1557429146\";s:5:\"image\";s:23:\"71QHGTKiwAL__UX342_.jpg\";s:4:\"time\";s:10:\"1557429233\";s:11:\"time_update\";s:10:\"1557481826\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"44\";s:8:\"quantity\";s:1:\"2\";s:11:\"procurement\";s:1:\"0\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:41:\"Espoir_Analog_Blue_Dial_Mens_Watch_ESP_41\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:4:\"2500\";}s:16:\"product_quantity\";s:1:\"1\";}}', 1561805700, 'http://localhost/ministore/home/20', 'localhost', 'cashOnDelivery', NULL, 0, 0, 0, ''),
+(6, 1239, 1, 'a:2:{i:0;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:2:\"20\";s:6:\"folder\";s:10:\"1556946563\";s:5:\"image\";s:26:\"samsung-led-tv-500x500.jpg\";s:4:\"time\";s:10:\"1556946621\";s:11:\"time_update\";s:10:\"1558434670\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"13\";s:8:\"quantity\";s:1:\"2\";s:11:\"procurement\";s:1:\"0\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:34:\"Grey_Samsung_LED_TV_Screen_Size_20\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:5:\"25500\";}s:16:\"product_quantity\";s:1:\"1\";}i:1;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:2:\"28\";s:6:\"folder\";s:10:\"1557426429\";s:5:\"image\";s:11:\"images1.jpg\";s:4:\"time\";s:10:\"1557426627\";s:11:\"time_update\";s:10:\"1558434750\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"43\";s:8:\"quantity\";s:1:\"6\";s:11:\"procurement\";s:1:\"4\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:52:\"Lenovo_Laptop_IPIAP_XRBDIN_Intel_Pentium_QuadCore_28\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:5:\"30990\";}s:16:\"product_quantity\";s:1:\"1\";}}', 1566495276, 'Direct', 'Direct', 'cashOnDelivery', NULL, 0, 0, 0, ''),
+(7, 1240, 1, 'a:1:{i:0;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:1:\"6\";s:6:\"folder\";s:10:\"1556906884\";s:5:\"image\";s:12:\"download.jpg\";s:4:\"time\";s:10:\"1556907157\";s:11:\"time_update\";s:10:\"1558434215\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"24\";s:8:\"quantity\";s:2:\"10\";s:11:\"procurement\";s:1:\"0\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:18:\"Samsung_Galaxy_J_6\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:5:\"20900\";}s:16:\"product_quantity\";s:1:\"1\";}}', 1566501208, 'Direct', 'Direct', 'cashOnDelivery', NULL, 1, 1, 0, ''),
+(8, 1241, 1, 'a:2:{i:0;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:2:\"22\";s:6:\"folder\";s:10:\"1556946832\";s:5:\"image\";s:14:\"images_(1).jpg\";s:4:\"time\";s:10:\"1556946952\";s:11:\"time_update\";s:10:\"1558434605\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"13\";s:8:\"quantity\";s:1:\"2\";s:11:\"procurement\";s:1:\"0\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:66:\"Samsung_cm_inch_HD_Ready_LED_TV_Edition_at_Best_Prices_Flipkart_22\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:5:\"30990\";}s:16:\"product_quantity\";s:1:\"2\";}i:1;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:2:\"48\";s:6:\"folder\";s:10:\"1557559915\";s:5:\"image\";s:10:\"th_(1).jpg\";s:4:\"time\";s:10:\"1557560186\";s:11:\"time_update\";s:10:\"1557560509\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"46\";s:8:\"quantity\";s:1:\"1\";s:11:\"procurement\";s:1:\"0\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:10:\"GFC_Fan_48\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:4:\"3000\";}s:16:\"product_quantity\";s:1:\"1\";}}', 1566575963, 'Direct', 'Direct', 'cashOnDelivery', NULL, 0, 0, 0, ''),
+(9, 1242, 0, 'a:2:{i:0;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:1:\"6\";s:6:\"folder\";s:10:\"1556906884\";s:5:\"image\";s:12:\"download.jpg\";s:4:\"time\";s:10:\"1556907157\";s:11:\"time_update\";s:10:\"1558434215\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"24\";s:8:\"quantity\";s:1:\"9\";s:11:\"procurement\";s:1:\"1\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:18:\"Samsung_Galaxy_J_6\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:5:\"20900\";}s:16:\"product_quantity\";s:1:\"2\";}i:1;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:2:\"35\";s:6:\"folder\";s:10:\"1557428026\";s:5:\"image\";s:14:\"images_(2).jpg\";s:4:\"time\";s:10:\"1557428152\";s:11:\"time_update\";s:10:\"1557481558\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"39\";s:8:\"quantity\";s:2:\"12\";s:11:\"procurement\";s:1:\"0\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:48:\"HP_Notebook_GTU_Laptop_Core_i_st_Gen_GB_GBDOS_35\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:5:\"55000\";}s:16:\"product_quantity\";s:1:\"1\";}}', 1566617031, 'http://localhost/snippick/myaccount', 'localhost', 'cashOnDelivery', NULL, 0, 0, 0, ''),
+(10, 1243, 0, 'a:2:{i:0;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:1:\"6\";s:6:\"folder\";s:10:\"1556906884\";s:5:\"image\";s:12:\"download.jpg\";s:4:\"time\";s:10:\"1556907157\";s:11:\"time_update\";s:10:\"1558434215\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"24\";s:8:\"quantity\";s:1:\"9\";s:11:\"procurement\";s:1:\"1\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:18:\"Samsung_Galaxy_J_6\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:5:\"20900\";}s:16:\"product_quantity\";s:1:\"2\";}i:1;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:2:\"35\";s:6:\"folder\";s:10:\"1557428026\";s:5:\"image\";s:14:\"images_(2).jpg\";s:4:\"time\";s:10:\"1557428152\";s:11:\"time_update\";s:10:\"1557481558\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"39\";s:8:\"quantity\";s:2:\"12\";s:11:\"procurement\";s:1:\"0\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:48:\"HP_Notebook_GTU_Laptop_Core_i_st_Gen_GB_GBDOS_35\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:5:\"55000\";}s:16:\"product_quantity\";s:1:\"1\";}}', 1566617229, 'http://localhost/snippick/myaccount', 'localhost', 'cashOnDelivery', NULL, 0, 0, 0, ''),
+(11, 1244, 1, 'a:2:{i:0;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:1:\"5\";s:6:\"folder\";s:10:\"1556906490\";s:5:\"image\";s:23:\"81gS9Sx0g7L__SX569_.jpg\";s:4:\"time\";s:10:\"1556906649\";s:11:\"time_update\";s:10:\"1558434407\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"26\";s:8:\"quantity\";s:2:\"14\";s:11:\"procurement\";s:1:\"1\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:53:\"Apple_iPhone_Plus_GSM_Unlocked_GB_Rose_Gold_Renewed_5\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:5:\"25500\";}s:16:\"product_quantity\";s:1:\"1\";}i:1;a:2:{s:12:\"product_info\";a:17:{s:11:\"vendor_name\";N;s:9:\"vendor_id\";s:1:\"0\";s:2:\"id\";s:2:\"34\";s:6:\"folder\";s:10:\"1557427883\";s:5:\"image\";s:25:\"2014-02-25-product-20.jpg\";s:4:\"time\";s:10:\"1557427950\";s:11:\"time_update\";s:10:\"1557481530\";s:10:\"visibility\";s:1:\"1\";s:14:\"shop_categorie\";s:2:\"39\";s:8:\"quantity\";s:2:\"10\";s:11:\"procurement\";s:1:\"0\";s:9:\"in_slider\";s:1:\"0\";s:3:\"url\";s:14:\"HP_Pavilion_34\";s:16:\"virtual_products\";N;s:8:\"brand_id\";N;s:8:\"position\";s:1:\"0\";s:5:\"price\";s:5:\"45000\";}s:16:\"product_quantity\";s:1:\"1\";}}', 1566617354, 'http://localhost/snippick/myaccount', 'localhost', 'cashOnDelivery', NULL, 0, 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -288,7 +299,7 @@ INSERT INTO `orders` (`id`, `order_id`, `user_id`, `products`, `date`, `referrer
 CREATE TABLE `orders_clients` (
   `id` int(11) NOT NULL,
   `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `phone` varchar(30) NOT NULL,
   `address` text NOT NULL,
@@ -307,7 +318,12 @@ INSERT INTO `orders_clients` (`id`, `first_name`, `last_name`, `email`, `phone`,
 (2, 'Limon', 'nul', 'limon@gmail.com', '01942510563', 'mirpur', 'dhaka', '1201', '', 2),
 (3, 'sjdfsg', 'jdhasgdjhgjh', 'arefinjule@gmail.com', '01840885998', 'ASJKDJKAS', 'dhaka', 'ASDAS', 'ASDASD', 3),
 (4, 'solaiman', 'jdhasgdjhgjh', 'arefinjule@gmail.com', '098', 'mnmnkjjyuyff', '09876543', 'kjuk', '', 4),
-(5, 'solaiman', 'jdhasgdjhgjh', 'promi@gmail.com', '01840885998', 'dsfsdfs', 'sdfsdf', '1223', 'adasda', 5);
+(5, 'solaiman', 'jdhasgdjhgjh', 'promi@gmail.com', '01840885998', 'dsfsdfs', 'sdfsdf', '1223', 'adasda', 5),
+(6, 'asd', 'asdf', 'anik.ku.cse@gmail.com', '+8801914307542', 'asdf', 'asdf', '1212', 'asdf', 6),
+(7, 'asd', 'asdf', 'anikpro.exe@gmail.com', '+8801914307542', 'asdasdasd', 'asdasd', '1212', '', 7),
+(8, 'asd', 'asdf', 'anik.ku.cse@gmail.com', '+8801914307542', 'asd', 'Dhaka', '1212', '', 8),
+(9, 'asd', NULL, 'anik1513@cseku.ac.bd', '+8801914307542', 'asad', 'Dhaka', '1212', '6545646', 10),
+(10, 'anikpro', NULL, 'anik.ku.cse@gmail.comm', '+8801914307542', 'asdasdasdasd', 'asdasd', 'asdasd', 'last', 11);
 
 -- --------------------------------------------------------
 
@@ -321,16 +337,16 @@ CREATE TABLE `products` (
   `image` varchar(255) NOT NULL,
   `time` int(10) UNSIGNED NOT NULL COMMENT 'time created',
   `time_update` int(10) UNSIGNED NOT NULL COMMENT 'time updated',
-  `visibility` tinyint(1) NOT NULL DEFAULT '1',
+  `visibility` tinyint(1) NOT NULL DEFAULT 1,
   `shop_categorie` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL DEFAULT '0',
+  `quantity` int(11) NOT NULL DEFAULT 0,
   `procurement` int(10) UNSIGNED NOT NULL,
-  `in_slider` tinyint(1) NOT NULL DEFAULT '0',
+  `in_slider` tinyint(1) NOT NULL DEFAULT 0,
   `url` varchar(255) NOT NULL,
   `virtual_products` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `brand_id` int(5) DEFAULT NULL,
   `position` int(10) UNSIGNED NOT NULL,
-  `vendor_id` int(11) NOT NULL DEFAULT '0'
+  `vendor_id` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -341,7 +357,7 @@ INSERT INTO `products` (`id`, `folder`, `image`, `time`, `time_update`, `visibil
 (2, 1556897991, '85484cdbea216c128aeafc5c9027f690-1000x1000.jpg', 1556898065, 1557482247, 1, 2, 12, 0, 1, 'Infinix_Hot_Pro_X_Smartphone_GB_RAM_GB_ROM_MP_MP_Camera_Black_2', NULL, NULL, 1, 0),
 (3, 1556900025, 'xiaomi-mi-9-2.jpg', 1556900102, 1558434383, 1, 19, 10, 0, 1, 'xiaomi_mi_price_3', NULL, NULL, 3, 0),
 (5, 1556906490, '81gS9Sx0g7L__SX569_.jpg', 1556906649, 1558434407, 1, 26, 14, 1, 0, 'Apple_iPhone_Plus_GSM_Unlocked_GB_Rose_Gold_Renewed_5', NULL, NULL, 0, 0),
-(6, 1556906884, 'download.jpg', 1556907157, 1558434215, 1, 24, 10, 0, 0, 'Samsung_Galaxy_J_6', NULL, NULL, 0, 0),
+(6, 1556906884, 'download.jpg', 1556907157, 1558434215, 1, 24, 9, 1, 0, 'Samsung_Galaxy_J_6', NULL, NULL, 0, 0),
 (7, 1556907233, '41wE4XNt6dL.jpg', 1556907359, 1558434482, 1, 24, 2, 0, 0, 'Samsung_Galaxy_S_SMGV_GB_Sapphire_Black_Smartphone_for_Verizon_Renewed_7', NULL, NULL, 0, 0),
 (9, 1556907574, '61Y7XldV1jL__SL1500_.jpg', 1556907638, 1558434122, 1, 27, 1, 0, 0, 'Samsung_Galaxy_S_Unlocked_gb_Midnight_Black_US_Warranty_Renewed_9', NULL, NULL, 0, 0),
 (11, 1556909017, '911NRkSMp3L__SL1500_.jpg', 1556909304, 1558434141, 1, 2, 1, 0, 0, 'Samsung_inches_HD_Ready_LED_TV_11', NULL, NULL, 0, 0),
@@ -608,7 +624,7 @@ CREATE TABLE `users` (
   `username` varchar(50) NOT NULL,
   `password` varchar(32) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `notify` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'notifications by email',
+  `notify` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'notifications by email',
   `last_login` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -617,7 +633,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `notify`, `last_login`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'your@email.com', 0, 1562315143);
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'your@email.com', 0, 1566508077);
 
 -- --------------------------------------------------------
 
@@ -631,8 +647,35 @@ CREATE TABLE `users_public` (
   `email` varchar(255) NOT NULL,
   `phone` varchar(100) NOT NULL,
   `password` varchar(40) NOT NULL,
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users_public`
+--
+
+INSERT INTO `users_public` (`id`, `name`, `email`, `phone`, `password`, `created`) VALUES
+(1, 'anikpro', 'anik.ku.cse@gmail.comm', '+8801914307542', '202cb962ac59075b964b07152d234b70', '2019-08-23 19:33:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_address`
+--
+
+CREATE TABLE `user_address` (
+  `id` int(11) NOT NULL,
+  `address` text NOT NULL,
+  `city` varchar(100) NOT NULL,
+  `post_code` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_address`
+--
+
+INSERT INTO `user_address` (`id`, `address`, `city`, `post_code`) VALUES
+(1, 'asdasdasdasd', 'asdasd', 'asdasd');
 
 -- --------------------------------------------------------
 
@@ -693,8 +736,8 @@ CREATE TABLE `vendors` (
   `url` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -702,7 +745,8 @@ CREATE TABLE `vendors` (
 --
 
 INSERT INTO `vendors` (`id`, `name`, `url`, `email`, `password`, `updated_at`, `created_at`) VALUES
-(1, NULL, '', 'admin@gmail.com', '$2y$10$KqRtIPh4VYKCdt2ylxDjD.kDRRAw2M1wTNPvliJ867dW71ZnDm.fK', '2019-06-29 06:21:10', '2019-06-29 06:21:10');
+(1, NULL, '', 'admin@gmail.com', '$2y$10$KqRtIPh4VYKCdt2ylxDjD.kDRRAw2M1wTNPvliJ867dW71ZnDm.fK', '2019-06-29 06:21:10', '2019-06-29 06:21:10'),
+(2, NULL, '', 'a@b.com', '$2y$10$UWAqf6iP0z/uwahJh5VFb.HQra93n8blxF9d1DKaH61TAzJEoepdC', '2019-08-20 17:47:32', '2019-08-20 17:47:32');
 
 -- --------------------------------------------------------
 
@@ -719,9 +763,9 @@ CREATE TABLE `vendors_orders` (
   `clean_referrer` varchar(255) NOT NULL,
   `payment_type` varchar(255) NOT NULL,
   `paypal_status` varchar(10) DEFAULT NULL,
-  `processed` tinyint(1) NOT NULL DEFAULT '0',
-  `viewed` tinyint(1) NOT NULL DEFAULT '0',
-  `confirmed` tinyint(1) NOT NULL DEFAULT '0',
+  `processed` tinyint(1) NOT NULL DEFAULT 0,
+  `viewed` tinyint(1) NOT NULL DEFAULT 0,
+  `confirmed` tinyint(1) NOT NULL DEFAULT 0,
   `discount_code` varchar(20) NOT NULL,
   `vendor_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -895,6 +939,12 @@ ALTER TABLE `users_public`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_address`
+--
+ALTER TABLE `user_address`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `value_store`
 --
 ALTER TABLE `value_store`
@@ -959,7 +1009,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `confirm_links`
 --
 ALTER TABLE `confirm_links`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `cookie_law`
@@ -1001,13 +1051,13 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `orders_clients`
 --
 ALTER TABLE `orders_clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -1067,7 +1117,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_public`
 --
 ALTER TABLE `users_public`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `value_store`
@@ -1079,7 +1129,7 @@ ALTER TABLE `value_store`
 -- AUTO_INCREMENT for table `vendors`
 --
 ALTER TABLE `vendors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `vendors_orders`
